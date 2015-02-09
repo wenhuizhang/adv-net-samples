@@ -1,0 +1,38 @@
+wenhui-2:Downloads WenhuiZhang$ /Users/WenhuiZhang/Downloads/a.out 
+Starting of the program, start_t = 2024
+create thread 0
+create thread 1
+create thread 2
+create thread 3
+create thread 4
+create thread 5
+create thread 6
+create thread 7
+create thread 8
+create thread 9
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+End of the process end_t = 2651
+Total time cost by running 10 of threads for increase function: 0.000627
+Starting of the program, start_t = 2693
+create thread 0
+create thread 1
+create thread 2
+create thread 3
+create thread 4
+create thread 5
+create thread 6
+create thread 7
+create thread 8
+create thread 9
+End of the process end_t = 3173
+Total time cost by running 10 of threads for compare and swap function: 0.000480
+Exiting of the program...
