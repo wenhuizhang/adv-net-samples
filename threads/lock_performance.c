@@ -69,7 +69,7 @@ int main(void)
     for (tnum = 0; tnum < num_threads; tnum++){
         printf("create thread %d\n", tnum);
         
-        rc = pthread_create(&thread_info[tnum], NULL, (void*)&thread_incr, &tnum);
+        rc = pthread_create(&thread_info[tnum], NULL, (void*)&thread_incr, NULL);
         if (rc){
             printf("ERROR; return code from pthread_create() is %d\n", rc);
             exit(1);
@@ -99,7 +99,7 @@ int main(void)
     for (tnum = 0; tnum < num_threads; tnum++){
         printf("create thread %d\n", tnum);
         
-        rc = pthread_create(&thread_info[tnum], NULL, (void*)&compare_and_swap, &tnum);
+        rc = pthread_create(&thread_info[tnum], NULL, (void*)&compare_and_swap, NULL);
         if (rc){
             printf("ERROR; return code from pthread_create() is %d\n", rc);
             exit(1);
