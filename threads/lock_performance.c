@@ -45,25 +45,6 @@ void thread_no_lock()
 }
 
 
-/* compare_and_swap: thread function for multi-thread generation */
-/*
- void compare_and_swap()
- {
- 
- pthread_mutex_lock(&count_mutex);
- 
- int oldvalue = 3;
- int newvalue = 4;
- int *ptr = &newvalue;
- int temp = *ptr;
- if(*ptr == oldvalue)
- *ptr = newvalue;
- 
- pthread_mutex_unlock(&count_mutex);
- 
- }
- */
-
 
 
 
