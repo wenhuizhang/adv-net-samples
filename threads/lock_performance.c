@@ -2,7 +2,7 @@
  * measures the performance cost by time of using locks in multi-thread program
  * Measure the overhead of calling lock and unlock depending on the level of contention
  * by utilizing clock(), in time.h
- * Author: Wenhui Zhang， Hu Yang
+ * Author: Wenhui Zhang， Hu Yang, Pradeep
  */
 
 
@@ -11,39 +11,58 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#define num_threads 1000
 
 
-int n;
-/* thread_incr: thread function for multi-thread generation */
-void thread_incr()
+int ctr;
+pthread_mutex_t count_mutex;
+
+
+
+
+/* thread_lock: thread function for multi-thread generation */
+void thread_lock()
 {
-    pthread_mutex_t count_mutex;
+    
     pthread_mutex_lock(&count_mutex);
     
-    n = n + 1;
-    printf("%d \n", n);
+    ctr = ctr + 1;
+    printf("%d \n", ctr);
     
     pthread_mutex_unlock(&count_mutex);
+    
+}
+
+
+/* thread_no_lock: thread function for multi-thread generation */
+void thread_no_lock()
+{
+    
+    ctr = ctr + 1;
+    printf("%d \n", ctr);
+    
     
 }
 
 
 /* compare_and_swap: thread function for multi-thread generation */
-void compare_and_swap()
-{
-    pthread_mutex_t count_mutex;
-    pthread_mutex_lock(&count_mutex);
-    
-    int oldvalue = 3;
-    int newvalue = 4;
-    int *ptr = &newvalue;
-    int temp = *ptr;
-    if(*ptr == oldvalue)
-        *ptr = newvalue;
-    
-    pthread_mutex_unlock(&count_mutex);
-    
-}
+/*
+ void compare_and_swap()
+ {
+ 
+ pthread_mutex_lock(&count_mutex);
+ 
+ int oldvalue = 3;
+ int newvalue = 4;
+ int *ptr = &newvalue;
+ int temp = *ptr;
+ if(*ptr == oldvalue)
+ *ptr = newvalue;
+ 
+ pthread_mutex_unlock(&count_mutex);
+ 
+ }
+ */
 
 
 
@@ -51,25 +70,24 @@ void compare_and_swap()
 int main(void)
 {
     clock_t start_t, end_t;
-    double total_t; //time counter
+    double total_t_lock, total_t_unlock; //time counter
     int rc;
-    int num_threads; // number of threads
     int tnum; //counter for threads
+    pthread_mutex_init(&count_mutex, NULL); //initialize mutex
     
     
-    num_threads = 10;
     
     pthread_t  thread_info[num_threads];	// thread identifier
     
-    /* Test for thread_incr */
-    start_t = clock();
+    /* Test for thread_incr_lock */
+   
     printf("Starting of the program, start_t = %ld\n", start_t);
-    
+     start_t = clock();
     
     for (tnum = 0; tnum < num_threads; tnum++){
         printf("create thread %d\n", tnum);
         
-        rc = pthread_create(&thread_info[tnum], NULL, (void*)&thread_incr, NULL);
+        rc = pthread_create(&thread_info[tnum], NULL, (void*)&thread_lock, NULL);
         if (rc){
             printf("ERROR; return code from pthread_create() is %d\n", rc);
             exit(1);
@@ -84,22 +102,22 @@ int main(void)
     
     end_t = clock();
     printf("End of the process end_t = %ld\n", end_t);
-    total_t = (double)((end_t - start_t) / (double)CLOCKS_PER_SEC);
-    printf("Total time cost by running %d of threads for increase function: %f\n", num_threads, total_t);
+    total_t_lock = (double)((end_t - start_t) / (double)CLOCKS_PER_SEC);
+    printf("Total time cost by running %d threads for increase function with lock implementation: %f\n sec", num_threads, total_t_lock);
     
     
     
-    /* Test for thread compare and swap */
+    /* Test for thread_incr_unlock */
     
+    ctr = 0;
     
-    start_t = clock();
     printf("Starting of the program, start_t = %ld\n", start_t);
     
-    
+    start_t = clock();
     for (tnum = 0; tnum < num_threads; tnum++){
         printf("create thread %d\n", tnum);
         
-        rc = pthread_create(&thread_info[tnum], NULL, (void*)&compare_and_swap, NULL);
+        rc = pthread_create(&thread_info[tnum], NULL, (void*)&thread_no_lock, NULL);
         if (rc){
             printf("ERROR; return code from pthread_create() is %d\n", rc);
             exit(1);
@@ -114,11 +132,13 @@ int main(void)
     
     end_t = clock();
     printf("End of the process end_t = %ld\n", end_t);
-    total_t = (double)((end_t - start_t) / (double)CLOCKS_PER_SEC);
-    printf("Total time cost by running %d of threads for compare and swap function: %f\n", num_threads, total_t);
+    total_t_unlock = (double)((end_t - start_t) / (double)CLOCKS_PER_SEC);
+    printf("Total time cost by running %d threads for increase function without lock implementation: %f sec\n", num_threads, total_t_unlock);
     
     
+
     
+    printf("Mutex Time Cost by running %d threads for increase function: %f sec\n", num_threads, total_t_lock - total_t_unlock);
     
     printf("Exiting of the program...\n");
     
