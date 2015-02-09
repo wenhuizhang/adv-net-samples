@@ -1,0 +1,48 @@
+Starting of the program, start_t = 140734590101880
+create thread 0
+create thread 1
+create thread 2
+1 
+create thread 3
+2 
+create thread 4
+3 
+create thread 5
+4 
+create thread 6
+5 
+create thread 7
+6 
+7 
+create thread 8
+8 
+create thread 9
+9 
+10 
+End of the process end_t = 3452
+Total time cost by running 10 threads for increase function with lock implementation: 0.000966
+ secStarting of the program, start_t = 2486
+create thread 0
+create thread 1
+1 
+create thread 2
+2 
+create thread 3
+3 
+create thread 4
+4 
+create thread 5
+5 
+create thread 6
+6 
+create thread 7
+7 
+create thread 8
+8 
+create thread 9
+9 
+10 
+End of the process end_t = 4308
+Total time cost by running 10 threads for increase function with atomic: 0.000815 sec
+Mutex Time Cost Against Atomic by running 10 threads for increase function: 0.000151 sec
+Exiting of the program...
