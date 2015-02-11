@@ -8,8 +8,10 @@
 #include <inttypes.h>
 #include <string.h>
 
+int ctr = 0;
+
 /****************************************
-        Author: Tim Wood
+        Author: Tim Wood, Wenhui Zhang
         with a little help from
         http://beej.us/guide/bgnet/
 ****************************************/
@@ -50,7 +52,12 @@ int main(int argc, char ** argv)
         }
 
         printf("server_ip: %s   port: %s\n", server_ip, server_port);
+    
+    while(1){
 
+        printf("%d\n", ctr);
+        ctr++;
+        
         /* The hints struct is used to specify what kind of server info we are looking for */
         memset(&hints, 0, sizeof hints);
         hints.ai_family = AF_INET;
@@ -84,6 +91,9 @@ int main(int argc, char ** argv)
                 perror("ERROR on send");
                 exit(-1);
         }
+        sleep(10);
+        
+    }
 
         out:
         freeaddrinfo(server);
