@@ -25,7 +25,6 @@ void thread_lock()
 {
     start_t = clock();
     pthread_mutex_lock(&count_mutex);
-    
     ctr = ctr + 1;
     //printf("%d \n", ctr);
     
