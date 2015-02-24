@@ -1,48 +1,19 @@
-Starting of the program, start_t = 140734691846520
-create thread 0
-create thread 1
-create thread 2
-create thread 3
-create thread 4
-create thread 5
-create thread 6
-create thread 7
-create thread 8
-create thread 9
-1 
-2 
-3 
-4 
-5 
-6 
-7 
-8 
-9 
-10 
-End of the process end_t = 2405
-Total time cost by running 10 threads for increase function with lock implementation: 0.000492
- secStarting of the program, start_t = 1913
-create thread 0
-create thread 1
-create thread 2
-create thread 3
-create thread 4
-create thread 5
-create thread 6
-create thread 7
-create thread 8
-create thread 9
-1 
-2 
-3 
-4 
-5 
-6 
-7 
-8 
-9 
-10 
-End of the process end_t = 2831
-Total time cost by running 10 threads for increase function without lock implementation: 0.000411 sec
-Mutex Time Cost by running 10 threads for increase function: 0.000081 sec
-Exiting of the program...
+wenhui:threads WenhuiZhang$ /Users/WenhuiZhang/Downloads/adv-net-samples-lock_performance/threads/a.out 
+-----------------------------
+lock performance for 1 thread
+Total time cost by running 1 threads for increase function with lock implementation: 0.000005
+ secStarting of the program, start_t = 2143
+End of the process end_t = 2256
+Total time cost by running 1 threads for increase function without lock implementation: 0.000002 sec
+Mutex Time Cost by running 1 threads for increase function: 0.000003 sec
+Per thread Mutex Time Cost by running 1 threads for increase function: 0.000003 sec
+ Exiting of the program...
+-----------------------------
+lock performance for 10000 thread
+Total time cost by running 10000 threads for increase function with lock implementation: 0.212840
+ secStarting of the program, start_t = 1301800
+End of the process end_t = 2339347
+Total time cost by running 10000 threads for increase function without lock implementation: 0.011199 sec
+Mutex Time Cost by running 10000 threads for increase function: 0.201641 sec
+Per thread Mutex Time Cost by running 10000 threads for increase function: 0.000020 sec
+ Exiting of the program...
