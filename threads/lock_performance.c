@@ -54,7 +54,8 @@ void thread_no_lock()
 int lock_performance(int num_threads)
 {
     
-    
+    acc_lock_t = 0;
+    acc_no_lock_t = 0;
     double total_t_lock, total_t_unlock; //time counter
     int rc;
     int tnum; //counter for threads
