@@ -43,8 +43,8 @@ void thread_atomic()
 {
     start_t = clock();
     for ( int i = 0; i < 100; i++){
-    __sync_add_and_fetch(&ctr, 1);
-    //printf("%d \n", ctr);
+        __sync_add_and_fetch(&ctr, 1);
+        //printf("%d \n", ctr);
     }
     end_t = clock();
     acc_atomic_t = acc_atomic_t + (end_t - start_t);
