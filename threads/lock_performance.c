@@ -24,12 +24,15 @@ clock_t start_t, end_t, acc_lock_t, acc_no_lock_t;
 void thread_lock()
 {
     start_t = clock();
-    pthread_mutex_lock(&count_mutex);
-    ctr = ctr + 1;
-    //printf("%d \n", ctr);
     
-    pthread_mutex_unlock(&count_mutex);
-    end_t = clock();
+    for (int i = 0; i < 100; i++){
+        pthread_mutex_lock(&count_mutex);
+        ctr = ctr + 1;
+        //printf("%d \n", ctr);
+    
+        pthread_mutex_unlock(&count_mutex);
+        end_t = clock();
+    }
     acc_lock_t = acc_lock_t + (end_t - start_t);
     
 }
@@ -39,8 +42,10 @@ void thread_lock()
 void thread_no_lock()
 {
     start_t = clock();
-    ctr = ctr + 1;
-    //printf("%d \n", ctr);
+    for (int i = 0; i < 100; i++){
+        ctr = ctr + 1;
+        //printf("%d \n", ctr);
+    }
     end_t = clock();
     acc_no_lock_t = acc_no_lock_t + (end_t - start_t);
     
