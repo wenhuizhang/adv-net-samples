@@ -16,7 +16,7 @@
 
 int ctr;
 pthread_mutex_t count_mutex;
-clock_t start_t, end_t, acc_lock_t, acc_atomic_t;
+clock_t start_t, end_t;
 
 
 
@@ -24,8 +24,8 @@ clock_t start_t, end_t, acc_lock_t, acc_atomic_t;
 /* thread_lock: thread function for multi-thread generation */
 void thread_lock()
 {
-    start_t = clock();
-    for ( int i = 0; i < 100; i++){
+
+    for ( int i = 0; i < 10000; i++){
         pthread_mutex_lock(&count_mutex);
     
         ctr = ctr + 1;
@@ -33,22 +33,18 @@ void thread_lock()
     
         pthread_mutex_unlock(&count_mutex);
     }
-    end_t = clock();
-    acc_lock_t = acc_lock_t + (end_t - start_t);
 }
 
 
 /* thread_atomic: thread function for multi-thread generation */
 void thread_atomic()
 {
-    start_t = clock();
-    for ( int i = 0; i < 100; i++){
+
+    for ( int i = 0; i < 10000; i++){
         __sync_add_and_fetch(&ctr, 1);
         //printf("%d \n", ctr);
     }
-    end_t = clock();
-    acc_atomic_t = acc_atomic_t + (end_t - start_t);
-    
+
 }
 
 
@@ -76,8 +72,7 @@ void thread_atomic()
 
 int atomic_comp(int num_threads)
 {
-    acc_lock_t = 0;
-    acc_atomic_t = 0;
+    
     
     printf("Start of %d thread calculating...\n", num_threads);
     double total_t_lock, total_t_unlock; //time counter
@@ -90,8 +85,8 @@ int atomic_comp(int num_threads)
     
     /* Test for thread_incr_lock */
     
+
     start_t = clock();
-    
     for (tnum = 0; tnum < num_threads; tnum++){
         //printf("create thread %d\n", tnum);
         
@@ -108,11 +103,12 @@ int atomic_comp(int num_threads)
     }
     
     
+    end_t = clock();
     
-    total_t_lock = (double)(acc_lock_t / (double)CLOCKS_PER_SEC);
+    total_t_lock = (double)((end_t - start_t) / (double)CLOCKS_PER_SEC);
     printf("Total time cost by running %d threads for increase function with lock implementation: %f\n sec", num_threads, total_t_lock);
     
-    
+   
     
     /* Test for thread_atomic */
     
@@ -135,8 +131,9 @@ int atomic_comp(int num_threads)
         pthread_join(thread_info[tnum], NULL);
     }
     
+    end_t = clock();
     
-    total_t_unlock = (double)(acc_atomic_t / (double)CLOCKS_PER_SEC);
+    total_t_unlock = (double)( (end_t - start_t) / (double)CLOCKS_PER_SEC);
     printf("Total time cost by running %d threads for increase function with atomic: %f sec\n", num_threads, total_t_unlock);
     
     
@@ -156,11 +153,11 @@ int atomic_comp(int num_threads)
 int main(void)
 {
     printf("------------------------\n");
-    atomic_comp(20);
+    atomic_comp(16);
     printf("------------------------\n");
     atomic_comp(1);
     printf("------------------------\n");
-    atomic_comp(1000);
+    atomic_comp(160);
     
     return 0;
     
