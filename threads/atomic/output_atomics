@@ -1,21 +1,22 @@
+wenhui-2:threads WenhuiZhang$ ./atomics 
 ------------------------
-Start of 20 thread calculating...
-Total time cost by running 20 threads for increase function with lock implementation: 0.000075
- secTotal time cost by running 20 threads for increase function with atomic: 0.000034 sec
-Mutex Time Cost Against Atomic by running 20 threads for increase function: 0.000041 sec
-Per thread Mutex Time Cost Against Atomic by running 20 threads for increase function: 0.000002 sec
-End of 20 thread calculating...
+Start of 16 thread calculating...
+Total time cost by running 16 threads for increase function with lock implementation: 0.680011
+ secTotal time cost by running 16 threads for increase function with atomic: 0.016044 sec
+Mutex Time Cost Against Atomic by running 16 threads for increase function: 0.663967 sec
+Per thread Mutex Time Cost Against Atomic by running 16 threads for increase function: 0.041498 sec
+End of 16 thread calculating...
 ------------------------
 Start of 1 thread calculating...
-Total time cost by running 1 threads for increase function with lock implementation: 0.000002
- secTotal time cost by running 1 threads for increase function with atomic: 0.000002 sec
-Mutex Time Cost Against Atomic by running 1 threads for increase function: 0.000000 sec
-Per thread Mutex Time Cost Against Atomic by running 1 threads for increase function: 0.000000 sec
+Total time cost by running 1 threads for increase function with lock implementation: 0.000611
+ secTotal time cost by running 1 threads for increase function with atomic: 0.000132 sec
+Mutex Time Cost Against Atomic by running 1 threads for increase function: 0.000479 sec
+Per thread Mutex Time Cost Against Atomic by running 1 threads for increase function: 0.000479 sec
 End of 1 thread calculating...
 ------------------------
-Start of 1000 thread calculating...
-Total time cost by running 1000 threads for increase function with lock implementation: 0.044994
- secTotal time cost by running 1000 threads for increase function with atomic: 0.001525 sec
-Mutex Time Cost Against Atomic by running 1000 threads for increase function: 0.043469 sec
-Per thread Mutex Time Cost Against Atomic by running 1000 threads for increase function: 0.000043 sec
-End of 1000 thread calculating...
+Start of 160 thread calculating...
+Total time cost by running 160 threads for increase function with lock implementation: 7.917729
+ secTotal time cost by running 160 threads for increase function with atomic: 0.159848 sec
+Mutex Time Cost Against Atomic by running 160 threads for increase function: 7.757881 sec
+Per thread Mutex Time Cost Against Atomic by running 160 threads for increase function: 0.048487 sec
+End of 160 thread calculating...
